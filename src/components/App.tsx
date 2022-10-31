@@ -27,7 +27,7 @@ function App() {
 
   return (
     <main>
-      <SearchBar onChange={(e) => getBeers(e)} />
+      <SearchBar onSearchUpdate={(e) => getBeers(e)} />
       {/* content */}
       {/* search results */}
     </main>
