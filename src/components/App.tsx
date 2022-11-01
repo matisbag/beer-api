@@ -1,13 +1,15 @@
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import SearchBar from './SearchBar'
+import Results from './Results'
 import '../styles/App.css'
 
 function App() {
+  const [search, setSearch] = useState('')
   const [error, setError] = useState(null)
   const [isLoaded, setIsLoaded] = useState(false)
   const [items, setItems] = useState([])
 
-  function getBeers(search: string) {
+  useEffect(() => {
     fetch(
       `https://api.punkapi.com/v2/beers${search ? `?beer_name=${search}` : ''}`
     )
@@ -23,13 +25,12 @@ function App() {
           setError(error)
         }
       )
-  }
+  }, [search])
 
   return (
     <main>
-      <SearchBar onSearchUpdate={(e) => getBeers(e)} />
-      {/* content */}
-      {/* search results */}
+      <SearchBar onSearchUpdate={(e) => setSearch(e)} />
+      <Results beers={items} />
     </main>
   )
 }
