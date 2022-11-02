@@ -6,22 +6,23 @@ import '../styles/App.css'
 function App() {
   const [search, setSearch] = useState('')
   const [error, setError] = useState(null)
-  const [isLoaded, setIsLoaded] = useState(false)
+  const [loading, setLoading] = useState(true)
   const [items, setItems] = useState([])
 
   useEffect(() => {
+    setLoading(true)
     fetch(
       `https://api.punkapi.com/v2/beers${search ? `?beer_name=${search}` : ''}`
     )
       .then((res) => res.json())
       .then(
         (data) => {
-          setIsLoaded(true)
+          setLoading(false)
           setItems(data)
           console.log(data)
         },
         (error) => {
-          setIsLoaded(true)
+          setLoading(false)
           setError(error)
         }
       )
@@ -30,7 +31,7 @@ function App() {
   return (
     <main>
       <SearchBar onSearchUpdate={(e) => setSearch(e)} />
-      <Results beers={items} />
+      <Results beers={items} loading={loading} />
     </main>
   )
 }

@@ -9,6 +9,5 @@ root.render(
   <React.StrictMode>
     <Header />
     <App />
-    <footer>footer</footer>
   </React.StrictMode>
 )
