@@ -1,29 +1,33 @@
 import { useState, useEffect } from 'react'
 import SearchBar from './SearchBar'
 import Results from './Results'
+import { API_URL, Beer } from '../utils/punkapi'
 import '../styles/App.css'
 
 function App() {
-  const [search, setSearch] = useState('')
-  const [error, setError] = useState(null)
-  const [loading, setLoading] = useState(true)
-  const [items, setItems] = useState([])
+  const [search, setSearch] = useState<string>('')
+  const [error, setError] = useState<string>('')
+  const [loading, setLoading] = useState<boolean>(true)
+  const [items, setItems] = useState<Beer[]>([])
 
   useEffect(() => {
     setLoading(true)
-    fetch(
-      `https://api.punkapi.com/v2/beers${search ? `?beer_name=${search}` : ''}`
-    )
-      .then((res) => res.json())
+    fetch(`${API_URL}${search ? `?beer_name=${search}` : ''}`)
+      .then((res) => {
+        if (res.ok) {
+          return res.json()
+        }
+        throw new Error('Something went wrong')
+      })
       .then(
         (data) => {
           setLoading(false)
           setItems(data)
-          console.log(data)
+          setError('')
         },
         (error) => {
           setLoading(false)
-          setError(error)
+          setError(error.message)
         }
       )
   }, [search])
@@ -31,7 +35,7 @@ function App() {
   return (
     <main>
       <SearchBar onSearchUpdate={(e) => setSearch(e)} />
-      <Results beers={items} loading={loading} />
+      <Results beers={items} loading={loading} error={error} />
     </main>
   )
 }
