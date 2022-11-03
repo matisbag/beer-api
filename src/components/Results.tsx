@@ -21,7 +21,7 @@ function Results({ beers, loading, error }: Props) {
           >
             <div className="flex h-28 w-28 items-center justify-center rounded-md border border-gray-100 bg-gray-50 p-3">
               <img
-                src={beer.image_url || ''}
+                src={beer.image_url || '/no-beer.png'}
                 alt={beer.name}
                 className="max-h-full max-w-full"
               />
