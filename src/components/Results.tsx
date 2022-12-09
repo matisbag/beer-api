@@ -3,9 +3,9 @@ import Loading from './Loading'
 import { Beer } from '../utils/punkapi'
 
 type Props = {
-  beers: Beer[]
+  beers: Beer[] | null
   loading: boolean
-  error: string
+  error: string | null
 }
 
 function Results({ beers, loading, error }: Props) {
@@ -14,7 +14,7 @@ function Results({ beers, loading, error }: Props) {
       <Loading loading={loading} />
       {!!error && <ErrorAlert error={error} />}
       <div className="flex flex-col space-y-6">
-        {beers.map((beer) => (
+        {beers?.map((beer) => (
           <section
             key={beer.id}
             className="w-full flex items-start rounded-md bg-white p-4 shadow"
