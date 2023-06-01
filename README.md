@@ -1,8 +1,10 @@
 # Beer api
 
-Ce projet est une app React qui permet de rechercher des bières, en se connectant à l'API [Punk API](https://punkapi.com/).
+My project is a web page with a search bar that utilizes the Punk API to display beer results based on the search query.
 
-## Utilisation
+![Preview image](.github/assets/preview.png)
+
+## Getting Started
 
 ```bash
 # install dependencies
@@ -12,4 +14,7 @@ $ npm install
 $ npm start
 ```
 
-## Aperçu
+## Technologies Used
+
+- [React](https://react.dev/)
+- [Tailwind CSS](https://tailwindcss.com/)
